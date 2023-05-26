@@ -31,10 +31,10 @@ class InternalLoggerNode(Node):
         self.internal_modem_subscription = self.create_subscription(
             Modem, 
             '/modem/internal_data', 
-            self.internal_modem_callback, 
+            self.internal_logger_callback, 
             10)
 
-    def internal_modem_callback(self, msg:Modem):
+    def internal_logger_callback(self, msg:Modem):
         data = msg.internal_data
         with open(self.file, 'a', newline='') as csv_file:
                 writer = csv.writer(csv_file, delimiter=';')

@@ -31,10 +31,10 @@ class ExternalLoggerNode(Node):
         self.external_modem_subscription = self.create_subscription(
             Modem, 
             '/modem/external_data', 
-            self.external_modem_callback, 
+            self.external_logger_callback, 
             10)
 
-    def external_modem_callback(self, msg:Modem):
+    def external_logger_callback(self, msg:Modem):
         data = msg.external_data
         with open(self.file, 'a', newline='') as csv_file:
                 writer = csv.writer(csv_file, delimiter=';')
