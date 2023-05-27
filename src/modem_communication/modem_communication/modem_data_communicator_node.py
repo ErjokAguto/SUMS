@@ -42,9 +42,10 @@ class ModemCommunicator(Node):
         
         try:
             self.sock.send(data, 0) # Sending to everyone that wants to listen
-            self.get_logger().info('Data Sent to Modem \n%s' % data)
         except:
             self.get_logger().error('COULD NOT SEND DATA TO MODEM')
+        else:
+            self.get_logger().info('Data Sent to Modem \n%s' % data)
 
         # Receiving 
         full_time = self.start_time + self.transfer_delay
@@ -55,11 +56,11 @@ class ModemCommunicator(Node):
         # Setting a random timer for receiving
         self.sock.setTimeout(random.randrange(self.lower_bound, self.upper_bound, 300))
         rx = self.sock.receive()
+
         # Unpacking data
         if rx is not None:
             data = str(rx.from_) + ',' + bytearray(rx.data).decode()
-
             msg = Modem()
             msg.external_data = data
-            self.get_logger().info('Recieved data:\n%s' % data)
             self.external_modem_publisher_.publish(msg)
+            self.get_logger().info('Recieved data:\n%s' % data)

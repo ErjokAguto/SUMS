@@ -91,7 +91,7 @@ def generate_launch_description():
             package='modem_communication',
             namespace='modem',
             executable='modem_data_communicator',
-            name='subnero',
+            name='subnero_communicator',
             parameters=[
                         {'sample_time': sample_time},
                         {'transfer_delay': transfer_delay},
