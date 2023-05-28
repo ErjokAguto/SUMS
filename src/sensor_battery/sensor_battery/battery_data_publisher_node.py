@@ -15,8 +15,9 @@ class BatteryDataPublisher(Node):
     VOLTAGE_OFFSET = 0.33       # Volt
     CURRENT_SENSE = 37.8788     # Ampere / Volt
     VOLTAGE_SENSE = 11          # Volt / Volt
-    MIN_BATTERY_VOLATAGE = 19.2 # Volt
-    MAX_BATTERY_VOLTAGE = 25.2  # Volt
+    MIN_BATTERY_VOLATAGE = 19.8 # Volt
+    MAX_BATTERY_VOLTAGE = 25.5  # Volt
+    CONSTANT_OFFSET = 0.6       # Volt
 
     # Initialize
     def __init__(self):
@@ -45,9 +46,9 @@ class BatteryDataPublisher(Node):
         current_value = self.sensor.read_adc(self.A1, gain=self.GAIN)
 
         # Calculates all values
-        V = voltage_value * self.voltage_constant + 0.6 # Adding 0.6 because it works
-        I = current_value * self.current_constant
-        percent = 100 / (self.MAX_BATTERY_VOLTAGE - self.MIN_BATTERY_VOLATAGE) * V - 320    # Does not work
+        V = voltage_value * self.voltage_constant + self.CONSTANT_OFFSET
+        I = current_value * self.current_constant       # Does not work
+        percent = 100 / (self.MAX_BATTERY_VOLTAGE - self.MIN_BATTERY_VOLATAGE) * V - 100 / (self.MAX_BATTERY_VOLTAGE - self.MIN_BATTERY_VOLATAGE) *  self.MIN_BATTERY_VOLATAGE 
         
         # Populates the message
         msg.battery_voltage = V
