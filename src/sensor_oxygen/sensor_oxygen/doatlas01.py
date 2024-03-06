@@ -19,7 +19,7 @@ class AtlasI2C:
     SHORT_TIMEOUT = .3
     # the default bus for I2C on the newer Raspberry Pis, 
     # certain older boards use bus 0
-    DEFAULT_BUS = 1
+    DEFAULT_BUS = 3
     # the default address for the sensor
     DEFAULT_ADDRESS = 98
     LONG_TIMEOUT_COMMANDS = ("R", "CAL")
@@ -221,7 +221,7 @@ dev = get_devices()
   
 class DOATLAS01(object):
     
-    def __init__(self, bus=1):
+    def __init__(self, bus=3):
         # mg/L
         self._oxygen = 0.
         
