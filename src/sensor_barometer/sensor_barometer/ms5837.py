@@ -47,7 +47,7 @@ class MS5837(object):
     _MS5837_CONVERT_D1_256   = 0x40
     _MS5837_CONVERT_D2_256   = 0x50
     
-    def __init__(self, model=MODEL_30BA, bus=1):
+    def __init__(self, model=MODEL_30BA, bus=3):
         self._model = model
         
         try:
@@ -224,9 +224,9 @@ class MS5837(object):
         return n_rem ^ 0x00
     
 class MS5837_30BA(MS5837):
-    def __init__(self, bus=1):
+    def __init__(self, bus=3):
         MS5837.__init__(self, MODEL_30BA, bus)
         
 class MS5837_02BA(MS5837):
-    def __init__(self, bus=1):
+    def __init__(self, bus=3):
         MS5837.__init__(self, MODEL_02BA, bus)
