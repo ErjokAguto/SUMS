@@ -13,7 +13,7 @@ Link to the second original code: https://github.com/JoJoHTM/Sensors_drivers_BRO
 For a quick use, paste these commands
 More details for each command come after
 
-	git clone [https://github.com/Pederbs/SUMS](https://github.com/ErjokAguto/SUMS.git)
+	git clone https://github.com/ErjokAguto/SUMS
 
 	python3 init.py
 	. install/setup.bash
@@ -22,7 +22,7 @@ More details for each command come after
 Open a terminal window in the folder where you want to locate the program. 
 Import all the files with the command (this will create a folder named SUMS/ with the program)
 
-	git clone [https://github.com/Pederbs/SUMS](https://github.com/ErjokAguto/SUMS.git)
+	git clone https://github.com/ErjokAguto/SUMS
 
 Build all the packages with init.py
 
