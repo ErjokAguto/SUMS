@@ -79,7 +79,7 @@ class ADS1x15(object):
         if i2c is None:
             import Adafruit_GPIO.I2C as I2C
             i2c = I2C
-        self._device = i2c.get_i2c_device(address, **kwargs)
+        self._device = i2c.get_i2c_device(address, busnum=3, **kwargs) # endre busnummer til 3 for VIM
 
     def _data_rate_default(self):
         """Retrieve the default data rate for this ADC (in samples per second).
