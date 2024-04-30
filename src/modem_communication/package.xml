@@ -4,7 +4,7 @@
   <name>modem_communication</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="pederbsa@stud.ntnu.no">peder</maintainer>
+  <maintainer email="eaaguto@stud.ntnu.no">erjok</maintainer>
   <license>TODO: License declaration</license>
 
   <test_depend>ament_copyright</test_depend>
