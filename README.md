@@ -5,7 +5,7 @@ Sensor-drivers and connection to ROS2 architecture [ROS2 Humble](https://docs.ro
 
 This is a continuation of three previous projects for developing sensors to work underwater both as a Standalone Underwater Monitoring Station (SUMS) and for a mobile sensing rig mounted on a BlueRobotics BlueROV-2. 
 
-Unlike previous editions designed for the Raspberry Pi, this project has been adjusted to be compatible with the Khadas VIM 3. The VIM 3 is a more powerfull SBC equipped with an Neural Processing Unit (NPU), which greatly enhances the performance of neural network applications such as computer vision and machine learning.   
+Unlike previous editions designed for the Raspberry Pi, this project has been adjusted to be compatible with the Khadas VIM3. The VIM3 is a more powerfull SBC equipped with an Neural Processing Unit (NPU), which greatly enhances the performance of neural network applications such as computer vision and machine learning.   
 
 Link to the first original code: https://github.com/NathanLec/Sensors_drivers_BROV2 \
 Link to the second original code: https://github.com/JoJoHTM/Sensors_drivers_BROV2 \
