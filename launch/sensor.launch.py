@@ -4,25 +4,18 @@ from launch_ros.actions import Node
 import random
 
 sample_time = 10.0              # Sample time in seconds (float)
-n_sensors = 5                   # How many sensors that are in use (int)
+n_sensors = 5                   # How many sensors that are in use
 transfer_delay = 6.0            # How long transferring data takes in seconds(float)
-modem_IP = '192.168.42.86'      # IP for the modem (string)
-modem_port = 1100               # Port for the modem (int) [only change if using simulator]
-precision = 2                   # Variable for specifying the precision of the transmitted data (int)
-
-# Header for identifying logged data
-log_header = 'Time,Pressure,Voltage,Current,Oxygen,Salinity,Temperature'
+modem_IP = '192.168.42.195'     # IP for the modem
+modem_port = 1100               # Port for the modem
+precision = 2
 
 # Random generator to avoid deadlocks
-ms = 1000
-step = 200
-lower_bounds = [2 * ms, 4 * ms]
-upper_bounds = [4 * ms, 6 * ms]
-
-# Generating random bounds for each runtime based on the bounds above
+lower_bounds = [2, 4]   # Seconds
+upper_bounds = [4, 6]   # Seconds
 random_bounds = [
-    random.randrange(lower_bounds[0], upper_bounds[0], step),
-    random.randrange(lower_bounds[1], upper_bounds[1], step)
+    random.randrange(lower_bounds[0]*1000, lower_bounds[1]*1000, 200),
+    random.randrange(upper_bounds[0]*1000, upper_bounds[1]*1000, 200)
 ]
 
 
@@ -68,14 +61,14 @@ def generate_launch_description():
             namespace='logger',
             executable='internal_logger',
             name='internal',
-            parameters=[{'log_header': log_header}]
+            parameters=[]
         ),
         Node(
             package='logger',
             namespace='logger',
             executable='external_logger',
             name='external',
-            parameters=[{'log_header': log_header}]
+            parameters=[]
         ),
         Node(
             package='modem_communication',
@@ -91,7 +84,7 @@ def generate_launch_description():
             package='modem_communication',
             namespace='modem',
             executable='modem_data_communicator',
-            name='subnero_communicator',
+            name='subnero',
             parameters=[
                         {'sample_time': sample_time},
                         {'transfer_delay': transfer_delay},
@@ -100,5 +93,34 @@ def generate_launch_description():
                         {'lower_bound': random_bounds[0]},
                         {'upper_bound': random_bounds[1]}
             ]
+        ),
+        # Include all other nodes similarly...
+        Node(
+            package='cv_algorithm',
+            namespace='camera',
+            executable='computer_vision',
+            name='computer_vision',
+            parameters=[{'sample_time': sample_time}]
+        ),
+        Node(
+            package='image_client',
+            namespace='modem',
+            executable='bilde_klient',
+            name='imagetransfer',
+            parameters=[
+                {'sample_time': sample_time},
+                {'transfer_delay': transfer_delay},
+                {'modem_IP': modem_IP},
+                {'modem_port': modem_port},
+                {'lower_bound': random_bounds[0]},
+                {'upper_bound': random_bounds[1]}
+            ]
+        ),
+        Node(
+            package='auto_shutdown',
+            namespace='sensors',
+            executable='battery_monitor',
+            name='shutdown',
+            parameters=[{'sample_time': sample_time}]
         ),
     ])
